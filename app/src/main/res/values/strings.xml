@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidBase</string>
+    <string name="details">详情</string>
+    <string name="main">首页</string>
+</resources>

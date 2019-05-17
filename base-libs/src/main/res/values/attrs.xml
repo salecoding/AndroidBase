@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DateTimeEditView">
+        <attr name="type">
+            <enum name="datetime" value="1" />
+            <enum name="date" value="2" />
+            <enum name="time" value="3" />
+            <enum name="month" value="4" />
+        </attr>
+        <attr name="dateTimeValue" format="string" />
+    </declare-styleable>
+</resources>
