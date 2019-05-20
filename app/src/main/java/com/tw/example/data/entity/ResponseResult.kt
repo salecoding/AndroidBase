@@ -1,4 +1,4 @@
-package com.tw.example.bean
+package com.tw.example.data.entity
 
 import com.tw.baselibs.net.BaseHttpResult
 

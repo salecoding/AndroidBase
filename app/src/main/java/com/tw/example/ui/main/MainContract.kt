@@ -4,7 +4,7 @@ import com.tw.baselibs.mvp.IModel
 import com.tw.baselibs.mvp.IPresenter
 import com.tw.baselibs.mvp.IView
 import com.tw.baselibs.net.BaseHttpResult
-import com.tw.example.bean.QueryWhere
+import com.tw.example.data.entity.QueryWhere
 import com.tw.example.data.entity.TestEntity
 import io.reactivex.Observable
 

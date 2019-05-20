@@ -4,7 +4,7 @@ import com.tw.baselibs.mvp.BasePresenter
 import com.tw.baselibs.net.BaseHandleFuc
 import com.tw.baselibs.net.exception.ExceptionHandle
 import com.tw.baselibs.rx.RxSchedulers
-import com.tw.example.bean.QueryWhere
+import com.tw.example.data.entity.QueryWhere
 import com.tw.example.data.entity.TestEntity
 
 class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), MainContract.Presenter {

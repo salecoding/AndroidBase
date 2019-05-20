@@ -3,11 +3,13 @@ package com.tw.example.ui.main
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.blankj.utilcode.util.ToastUtils
 import com.tw.baselibs.base.BaseActivity
 import com.tw.baselibs.widget.RecyclerViewDivider
 import com.tw.example.R
-import com.tw.example.bean.QueryWhere
+import com.tw.example.data.entity.QueryWhere
 import com.tw.example.data.entity.TestEntity
+import com.tw.example.db.Album
 import com.tw.example.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,13 +34,18 @@ class MainActivity : BaseActivity<MainPresenter, ViewDataBinding>(), MainContrac
 
     override fun initData() {
         mPresenter?.requestTestData(queryWhere)
+
+        val album = Album()
+        album.name = "龙卷风"
+        album.price = 10.9F
+        album.saveAsync().listen { success -> if (success) ToastUtils.showShort("成功") else ToastUtils.showShort("失败") }
     }
 
     override fun initListener() {
-        swipeRefreshLayout.setOnRefreshListener({
+        swipeRefreshLayout.setOnRefreshListener {
             queryWhere.isRefresh = true
             mPresenter?.requestTestData(queryWhere)
-        })
+        }
         dataAdapter.setOnLoadMoreListener({
             queryWhere.isRefresh = false
             mPresenter?.requestTestData(queryWhere)

@@ -2,7 +2,7 @@ package com.tw.example.ui.main
 
 import com.tw.baselibs.mvp.BaseModel
 import com.tw.baselibs.net.BaseHttpResult
-import com.tw.example.bean.QueryWhere
+import com.tw.example.data.entity.QueryWhere
 import com.tw.example.data.entity.TestEntity
 import com.tw.example.data.repository.RetrofitUtils
 import io.reactivex.Observable

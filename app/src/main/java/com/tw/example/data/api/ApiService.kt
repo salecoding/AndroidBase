@@ -1,7 +1,7 @@
 package com.tw.example.data.api
 
 import com.tw.baselibs.net.BaseHttpResult
-import com.tw.example.bean.QueryWhere
+import com.tw.example.data.entity.QueryWhere
 import com.tw.example.data.entity.TestEntity
 import io.reactivex.Observable
 import retrofit2.http.Body

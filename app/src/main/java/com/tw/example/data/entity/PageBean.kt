@@ -1,4 +1,4 @@
-package com.tw.example.bean
+package com.tw.example.data.entity
 
 open class PageBean {
     var pageIndex = 1
