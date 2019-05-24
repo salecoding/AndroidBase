@@ -3,6 +3,7 @@ package com.tw.example.ui.main
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.amitshekhar.DebugDB
 import com.blankj.utilcode.util.ToastUtils
 import com.tw.baselibs.base.BaseActivity
 import com.tw.baselibs.widget.RecyclerViewDivider
@@ -12,8 +13,14 @@ import com.tw.example.data.entity.TestEntity
 import com.tw.example.db.Album
 import com.tw.example.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.litepal.LitePal
+import org.litepal.extension.findAll
 
 class MainActivity : BaseActivity<MainPresenter, ViewDataBinding>(), MainContract.View {
+    companion object {
+        const val DATA_DETAILS = "dataDetails"
+        const val IS_INIT_DATA = "isInitData"
+    }
 
     private val dataAdapter by lazy { DataAdapter() }
     private val queryWhere by lazy { QueryWhere() }
@@ -34,11 +41,10 @@ class MainActivity : BaseActivity<MainPresenter, ViewDataBinding>(), MainContrac
 
     override fun initData() {
         mPresenter?.requestTestData(queryWhere)
+        var allAlbums = LitePal.findAll<Album>()
+        ToastUtils.showShort("${allAlbums?.size}")
 
-        val album = Album()
-        album.name = "龙卷风"
-        album.price = 10.9F
-        album.saveAsync().listen { success -> if (success) ToastUtils.showShort("成功") else ToastUtils.showShort("失败") }
+        ToastUtils.showShort(DebugDB.getAddressLog())
     }
 
     override fun initListener() {
@@ -50,9 +56,9 @@ class MainActivity : BaseActivity<MainPresenter, ViewDataBinding>(), MainContrac
             queryWhere.isRefresh = false
             mPresenter?.requestTestData(queryWhere)
         }, rvDataList)
-        dataAdapter.setOnItemClickListener { adapter, view, position ->
-            var bundle = Bundle()
-            bundle.putParcelable("dataDetails", dataAdapter.getItem(position))
+        dataAdapter.setOnItemClickListener { _, _, position ->
+            val bundle = Bundle()
+            bundle.putParcelable(DATA_DETAILS, dataAdapter.getItem(position))
             startActivity(DetailsActivity::class.java, bundle)
         }
     }

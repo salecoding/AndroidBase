@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">base-libs</string>
     <string name="no_data">暂无数据o(︶︿︶)o</string>
+    <string name="scan">扫一扫</string>
 </resources>

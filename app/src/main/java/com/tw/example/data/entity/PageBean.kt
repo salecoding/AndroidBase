@@ -6,9 +6,9 @@ open class PageBean {
     var isRefresh = true
         set(refresh) {
             field = refresh
-            if (isRefresh)
-                pageIndex = 1
+            pageIndex = if (isRefresh)
+                1
             else
-                pageIndex = ++pageIndex
+                ++pageIndex
         }
 }
