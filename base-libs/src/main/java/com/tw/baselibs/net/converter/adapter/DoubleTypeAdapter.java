@@ -1,4 +1,4 @@
-package com.tw.baselibs.net;
+package com.tw.baselibs.net.converter.adapter;
 
 import android.util.Log;
 
@@ -13,12 +13,12 @@ import com.google.gson.stream.JsonWriter;
  * @email：salecoding@gmail.com
  * @date：2019/2/21
  */
-public class FloatTypeAdapter extends TypeAdapter<Float> {
+public class DoubleTypeAdapter extends TypeAdapter<Double> {
     @Override
-    public void write(JsonWriter out, Float value) {
+    public void write(JsonWriter out, Double value) {
         try {
             if (value == null) {
-                value = 0F;
+                value = 0D;
             }
             out.value(value);
         } catch (Exception e) {
@@ -27,29 +27,28 @@ public class FloatTypeAdapter extends TypeAdapter<Float> {
     }
 
     @Override
-    public Float read(JsonReader in) {
+    public Double read(JsonReader in) {
         try {
-            Float value;
+            Double value;
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
-                return 0F;
+                return 0D;
             }
             if (in.peek() == JsonToken.BOOLEAN) {
-                return 0F;
+                return 0D;
             }
             if (in.peek() == JsonToken.STRING) {
                 String str = in.nextString();
                 if (StringUtils.isEmpty(str))
-                    return 0F;
-                return Float.parseFloat(str);
+                    return 0D;
+                return Double.parseDouble(str);
             } else {
-                String str = in.nextString();
-                value = Float.valueOf(str);
+                value = in.nextDouble();
+                return value;
             }
-            return value;
         } catch (Exception e) {
-            Log.e("TypeAdapter", "Not a number", e);
+            Log.e("TypeAdapter", e.getMessage(), e);
         }
-        return 0F;
+        return 0D;
     }
 }

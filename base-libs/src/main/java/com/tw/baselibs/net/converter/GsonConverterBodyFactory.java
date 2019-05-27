@@ -5,9 +5,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.tw.baselibs.net.BaseHttpResult;
+import com.tw.baselibs.net.converter.adapter.DateTypeAdapter;
+import com.tw.baselibs.net.converter.adapter.DoubleTypeAdapter;
+import com.tw.baselibs.net.converter.adapter.FloatTypeAdapter;
+import com.tw.baselibs.net.converter.adapter.IntegerTypeAdapter;
+import com.tw.baselibs.net.converter.adapter.LongTypeAdapter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Date;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -23,8 +29,17 @@ public class GsonConverterBodyFactory extends Converter.Factory {
     private final Gson gson;
 
     public static GsonConverterBodyFactory create() {
-        GsonBuilder builder = new GsonBuilder().
-                registerTypeAdapter(BaseHttpResult.class, new GsonResponseDeserializer());
+        GsonBuilder builder = new GsonBuilder()
+                .registerTypeAdapter(Integer.class, new IntegerTypeAdapter())
+                .registerTypeAdapter(int.class, new IntegerTypeAdapter())
+                .registerTypeAdapter(Double.class, new DoubleTypeAdapter())
+                .registerTypeAdapter(double.class, new DoubleTypeAdapter())
+                .registerTypeAdapter(Long.class, new LongTypeAdapter())
+                .registerTypeAdapter(long.class, new LongTypeAdapter())
+                .registerTypeAdapter(Float.class, new FloatTypeAdapter())
+                .registerTypeAdapter(float.class, new FloatTypeAdapter())
+                .registerTypeAdapter(Date.class, new DateTypeAdapter())
+                .registerTypeAdapter(BaseHttpResult.class, new GsonResponseDeserializer());
         return create(builder);
     }
 

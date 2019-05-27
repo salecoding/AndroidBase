@@ -3,6 +3,7 @@ package com.tw.baselibs.net;
 import com.tw.baselibs.app.AppConfig;
 import com.tw.baselibs.app.BaseApp;
 import com.tw.baselibs.cache.CacheManager;
+import com.tw.baselibs.net.converter.GsonConverterBodyFactory;
 import com.tw.baselibs.net.interceptor.CacheInterceptor;
 import com.tw.baselibs.net.interceptor.HeaderInterceptor;
 import com.tw.baselibs.net.interceptor.ParameterInterceptor;
@@ -94,7 +95,7 @@ public class BaseRetrofit {
                             .baseUrl(AppConfig.BASE_URL)  //baseUrl配置
                             .client(client)
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .addConverterFactory(CustomGsonConverterFactory.create())
+                            .addConverterFactory(GsonConverterBodyFactory.create())
                             .build();
                 }
             }

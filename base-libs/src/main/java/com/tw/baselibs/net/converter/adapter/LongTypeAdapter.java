@@ -1,4 +1,4 @@
-package com.tw.baselibs.net;
+package com.tw.baselibs.net.converter.adapter;
 
 import android.util.Log;
 
@@ -8,17 +8,19 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+import java.io.IOException;
+
 /**
  * @author： lw
  * @email：salecoding@gmail.com
  * @date：2019/2/21
  */
-public class DoubleTypeAdapter extends TypeAdapter<Double> {
+public class LongTypeAdapter extends TypeAdapter<Long> {
     @Override
-    public void write(JsonWriter out, Double value) {
+    public void write(JsonWriter out, Long value) throws IOException {
         try {
             if (value == null) {
-                value = 0D;
+                value = 0L;
             }
             out.value(value);
         } catch (Exception e) {
@@ -27,28 +29,28 @@ public class DoubleTypeAdapter extends TypeAdapter<Double> {
     }
 
     @Override
-    public Double read(JsonReader in) {
+    public Long read(JsonReader in) {
         try {
-            Double value;
+            Long value;
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
-                return 0D;
+                return 0L;
             }
             if (in.peek() == JsonToken.BOOLEAN) {
-                return 0D;
+                return 0L;
             }
             if (in.peek() == JsonToken.STRING) {
                 String str = in.nextString();
                 if (StringUtils.isEmpty(str))
-                    return 0D;
-                return Double.parseDouble(str);
+                    return 0L;
+                return Long.parseLong(str);
             } else {
-                value = in.nextDouble();
+                value = in.nextLong();
                 return value;
             }
         } catch (Exception e) {
-            Log.e("TypeAdapter", e.getMessage(), e);
+            Log.e("TypeAdapter", "Not a number", e);
         }
-        return 0D;
+        return 0L;
     }
 }
